@@ -1,6 +1,8 @@
 package advanced.question07;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Question07_5 {
 
@@ -14,5 +16,33 @@ public class Question07_5 {
 		int[] amounts = new int[5];
 
 		// TODO: 実装ここから
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+		for (int i = 0; i < itemNames.length; i++) {
+			System.out.print(itemNames[i] + "の購入数: > ");
+			amounts[i] = Integer.parseInt(reader.readLine());
+		}
+		int totalTax = 0;
+		System.out.println("購入内容一覧");
+		for (int i = 0; i < itemNames.length; i++) {
+
+			int taxPrice = (int) (prices[i] * 1.1);
+			int subtotal = taxPrice * amounts[i];
+
+			System.out.println(
+					itemNames[i] + "：単価 " + prices[i] + "円（税込 " + taxPrice + "円） × " + amounts[i] + "個 = " + subtotal
+							+ "円");
+			totalTax += subtotal;
+
+		}
+		System.out.println("合計（税込）：" + totalTax + "円");
+
+		int discount = totalTax;
+
+		if (totalTax >= 5000) {
+			discount = (int) (totalTax * 0.9);
+		}
+		System.out.println("割引後合計（税込）:" + discount + "円");
 	}
 }

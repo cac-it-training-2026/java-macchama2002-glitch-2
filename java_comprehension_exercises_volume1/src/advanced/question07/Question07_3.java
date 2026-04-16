@@ -1,6 +1,8 @@
 package advanced.question07;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Question07_3 {
 
@@ -14,7 +16,40 @@ public class Question07_3 {
 		int[] amounts = new int[5];
 
 		// TODO: 実装ここから
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+		int[] stocks = new int[itemNames.length];
 
+		for (int i = 0; i < itemNames.length; i++) {
+			System.out.print(itemNames[i] + "の在庫数：＞");
+			stocks[i] = Integer.parseInt(reader.readLine());
+		}
+
+		for (int i = 0; i < itemNames.length; i++) {
+			while (true) {
+				System.out.print(itemNames[i] + "の購入数：＞");
+				int input = Integer.parseInt(reader.readLine());
+
+				if (input <= stocks[i]) {
+					amounts[i] = input;
+					break;
+				} else {
+					System.out.println("在庫を超えています。もう一度入力してください。");
+				}
+			}
+		}
+
+		int total = 0;
+
+		for (int i = 0; i < itemNames.length; i++) {
+			System.out.println(itemNames[i] + "：購入" + amounts[i] + "個");
+			System.out.println("在庫" + stocks[i] + "個");
+
+			int subtotal = prices[i] * amounts[i];
+			total += subtotal;
+
+		}
+		System.out.println("合計金額" + total + "円");
 	}
+
 }
